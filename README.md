@@ -9,3 +9,13 @@ with APIs.
 ## Where is it at?
 
 Currently, it appears mostly normal - however, it is in the middle of a rework of how the data structure is represented.
+
+## Where did it start?
+
+This project started as a route to express my passion for data management, organisation, and analytics of said data.
+
+There were no available tools in which to track a wide array of data for free, nor were any of the tools that can track
+specific types of data offering analytics for free.
+
+This is intended to fill that niche. However, it may not always stay in React or React Native - my goal is to have a
+a functional tool efficiently, then build out the structure in XSLT / XHTML to be an PWA [Progressive Web Application](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps).
