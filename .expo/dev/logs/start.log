@@ -4436,3 +4436,9 @@
 {"_e":"metro:client_log","_t":1783276748624,"level":"log","data":["BooleanInput render selected:","false"]}
 {"_e":"metro:client_log","_t":1783276748640,"level":"warn","data":["Use `dd` instead of `DD` (in `DD-MM-YYYY`) for formatting days of the month to the input `Fri Jan 05 2001 00:00:00 GMT+0000 (Greenwich Mean Time)`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md"]}
 {"_e":"metro:client_log","_t":1783276748641,"level":"log","data":["BooleanInput render selected:","false"]}
+{"_e":"root:init","_t":1783513314284,"format":"v0-jsonl","version":"56.1.18"}
+{"_e":"env:mode","_t":1783513314285,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1783513314288,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1783513314706,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../../../app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1783513315284,"serverRoot":"../../..","projectRoot":"../../..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"metro:instantiate","_t":1783513319789,"atlas":false,"workers":3,"host":"::","port":8081}
