@@ -2,7 +2,7 @@
 
 ## What is this?
 
-This is a project which provides a way to create your own templates for tracking specific data over time,
+This is a React Native project which provides a way to create your own templates for tracking specific data over time,
 and eventually will be able to integrate with tools such as Google Health Connect and (preferably) services
 with APIs.
 
