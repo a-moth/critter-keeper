@@ -1,0 +1,29 @@
+{
+  "text_input_1": ["text", "first test"],
+  "duration_input_1": ["duration", "1st", "2nd"],
+  "scale_input_1": ["scale", "0"],
+  "selection_input_1": ["selection", "false", "1st", "2nd", "3rd"],
+  "selection_input_2": [
+    "selection",
+    "false",
+    "1st",
+    "2nd",
+    "3rd",
+    "4th",
+    "5th",
+    "6th"
+  ],
+  "selection_input_3": ["selection", "true", "1st", "2nd", "3rd"],
+  "selection_input_4": [
+    "selection",
+    "true",
+    "1st",
+    "2nd",
+    "3rd",
+    "4th",
+    "5th",
+    "6th"
+  ],
+  "date_input_1": ["date", "1st", "May", "2001"],
+  "boolean_input_1": ["boolean", "false", "testy testes"]
+}

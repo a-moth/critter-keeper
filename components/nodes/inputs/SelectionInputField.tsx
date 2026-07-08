@@ -1,0 +1,57 @@
+import { Text, TextStyle, View } from "react-native";
+import { StandardFieldProps, SelectionField } from "../../../constants/nodeTypes";
+import SelectionInput from "./SelectionInput";
+import { useTheme } from "../../../hooks/use-theme-provider";
+
+export default function SelectionInputField({
+  id,
+  template,
+  fieldKey,
+  defaultShown,
+  onChange,
+  field,
+  locked,
+}: StandardFieldProps<SelectionField>) {
+  const theme = useTheme();
+
+  const textStyling: TextStyle = {
+    ...theme.sizes.default.text,
+    color: theme.colors.text,
+    fontFamily: theme.fonts?.regular.fontFamily,
+  };
+
+  let baseStyling = {
+    ...theme.sizes.default.input,
+    backgroundColor: theme.colors.card,
+    borderColor: theme.colors.border,
+    color: theme.colors.text,
+    fontFamily: theme.fonts?.regular.fontFamily,
+  };
+
+  if (locked) {
+    baseStyling = {
+      ...baseStyling,
+      backgroundColor: theme.colors.background,
+    };
+  }
+
+  return (
+    <View id={fieldKey} style={theme.sizes.default.container}>
+      <Text style={textStyling}>{fieldKey}</Text>
+
+      <SelectionInput
+        id={id}
+        template={template}
+        style={baseStyling}
+        textStyle={textStyling}
+        selected={field.selected}
+        newItems={field.options}
+        locked={locked}
+        multi={field.multiple}
+        fieldKey={fieldKey}
+        defaultShown={defaultShown}
+        onChange={onChange}
+      />
+    </View>
+  );
+}

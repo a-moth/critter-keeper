@@ -1,0 +1,18 @@
+{
+  "settings": {
+    "**customGreeting": ["setting", "Welcome to "],
+    "**dayStartTime": ["setting", "5:00AM"],
+    "**dayFormat": ["setting", "DD of MMM YYYY"],
+    "**timeFormat": ["setting", "HH:MMTT"],
+    "**appNickname": ["setting", "your journal"],
+    "**selfNickname": ["setting", "universe"],
+    "**settingsFolder": ["setting", "~/Documents"],
+    "**themeSettings": ["setting", "medium", "dark", "rounded"],
+    "**colourScheme": ["setting", "dark"],
+    "*reloadPurchases": ["setting", "show"],
+    "*unlockThemes": ["setting", "show"],
+    "*unlockAPI": ["setting", "show"],
+    "*unlockSlots": ["setting", "show"],
+    "UUID": ["setting", "49d569a5-31f4-4695-8895-f214124d89a0"]
+  }
+}

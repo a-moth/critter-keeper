@@ -1,4 +1,7 @@
 {
-  "name": "critterkeeper",
-  "displayName": "critterkeeper"
+  "expo": {
+    "name": "critterkeeper",
+    "slug": "critterkeeper",
+    "plugins": ["expo-router"]
+  }
 }

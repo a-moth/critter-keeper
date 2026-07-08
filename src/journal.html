@@ -1,0 +1,136 @@
+<!--
+
+||---------------------------------------||
+// a settings page
+// a user defined data page
+// a setup / organisation widget page
+||---------------------------------------||
+
+// symptom tracker
+// energy log
+// saving locally
+
+// all fields skippable except date autofills and will save with empty fields if all are empty
+-->
+
+<html>
+    <head>
+        <title>critterKeeper</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div id="header">
+            <a href="index.html">Home</a>
+            <h1>critterKeeper</h1>
+            <p>A container for the worst to best days.</p>
+        </div>
+        <div id="entry">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" />
+
+            <!-- Energy Log -->
+            <!--
+                // sleep length #drains .toggle/.toggled
+            -->
+            <label for="day data"><h2>Day Data</h2>
+                <label>sleep length</label>
+                <input
+                    type="number"
+                    id="sleep-hours"
+                    name="sleep-hours"
+                    min="0"
+                    placeholder="hrs"
+                >
+                <span>hours</span>
+                <input
+                    type="number"
+                    id="sleep-mins"
+                    name="sleep-mins"
+                    min="0"
+                    max="59"
+                    placeholder="mins"
+                >
+                <span>minutes</span>
+
+                <!--
+                    // energy picker #energy_level .picker .toggle/.toggled
+                -->
+                <label for="energy">energy level</label>
+                <select id="energy_level" name="energy">
+                    <option value="low">low</option>
+                    <option value="medium">medium</option>
+                    <option value="high">high</option>
+                </select>
+                <br/><br/>
+
+                <!--
+                    // drains list picker .picker #drains .toggle/.toggled | supports list picker .picker #supports .toggle/.toggled (minimisable, remembers its toggle)
+                -->
+                <div id=drains-container class="effects"> <!-- change to multi select list -->
+                    <label for="drains">drains</label>
+                    <select multiple id="drains" name="drains">
+                        <option value="one">one</option>
+                        <option value="two">two</option>
+                        <option value="three">three</option>
+                    </select>
+                </div>
+                <div id="supports-container" class="effects"> <!-- change to multi select list -->
+                    <label for="supports">supports</label>
+                    <select multiple id="supports" name="supports">
+                        <option value="one">one</option>
+                        <option value="two">two</option>
+                    </select>
+                </div>
+            </label>
+                <!-- Symptom Tracker -->
+                <!-- 
+                    // symptom list .picker #symptoms (if checkbox is checked, energypicker creature list)
+                -->
+            <br/><br/>
+            <h2>symptoms</h2>
+            <label for="fatigue" class="options">Fatigue
+                <input type="checkbox" id="fatigue" class="show-options" value="0" name="fatigue" >
+            </label>
+            <div id="fatigue-container" class="symptom-container" style="display: none;">
+                <label>
+                    <input type="radio" name="extra-option" value="1">
+                </label>
+
+                <label>
+                    <input type="radio" name="extra-option" value="2">
+                </label>
+
+                <label>
+                    <input type="radio" name="extra-option" value="3">
+                </label>
+
+                <label>
+                    <input type="radio" name="extra-option" value="4">
+                </label>
+
+                <label>
+                    <input type="radio" name="extra-option" value="5">
+                </label>
+            </div>
+            <br/>
+            <!--
+                // notes #notes .toggle/.toggled
+            -->
+            <label for="notes">notes</label>
+            <textarea id="notes" name="notes" rows="4" cols="30"></textarea>
+            <br/>
+        </div>
+        <script>
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = today;
+
+
+            const checkbox = document.getElementById('fatigue');
+            const container = document.getElementById('fatigue-container');
+
+            checkbox.addEventListener('change', () => {
+                container.style.display = checkbox.checked ? 'block' : 'none';
+            });
+        </script>
+    </body>
+</html>

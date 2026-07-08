@@ -1,0 +1,157 @@
+body {
+    background-color: rgb(53, 58, 65);
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+    display: block;
+}
+
+p {
+    text-align: center;
+}
+
+[type="checkbox"]{
+    width: 0;
+    height: 0;
+}
+
+.options {
+    background-color:white;
+    border-radius: 5px;
+    border: 2px solid black;
+    color:black;
+    text-align: center;
+    width: auto;
+    height: 25px;
+    font-weight: bold;
+    padding: 2px; 
+}
+
+[type="radio"]{
+    width: 0;
+    height: 0;
+}
+
+input[type="radio"][value="1"] {
+    content: url('critterkeeper/assets/images/1.png');
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    float: left;
+    border: 3px dotted white;
+}
+
+input[type="radio"][value="1"]:checked {
+    content: url('critterkeeper/assets/images/1.png');
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    border: 3px solid black;
+    border-bottom: 3px dotted white;
+}
+
+input[type="radio"][value="2"] {
+    content: url('critterkeeper/assets/images/2.png');
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    float: left;
+    border: 3px dotted white;
+}
+
+input[type="radio"][value="2"]:checked {
+    content: url('critterkeeper/assets/images/2.png');
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    border: 3px solid black;
+    border-bottom: 3px dotted white;
+}
+
+input[type="radio"][value="3"] {
+    content: url('critterkeeper/assets/images/3.png');
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    float: left;
+    border: 3px dotted white;
+}
+
+input[type="radio"][value="3"]:checked {
+    content: url('critterkeeper/assets/images/3.png');
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    border: 3px solid black;
+    border-bottom: 3px dotted white;
+}
+
+input[type="radio"][value="4"] {
+    content: url('critterkeeper/assets/images/4.png');
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    float: left;
+    border: 3px dotted white;
+}
+
+input[type="radio"][value="4"]:checked {
+    content: url('critterkeeper/assets/images/4.png');
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    border: 3px solid black;
+    border-bottom: 3px dotted white;
+}
+
+input[type="radio"][value="5"] {
+    content: url('critterkeeper/assets/images/5.png');
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    border: 3px dotted white;
+}
+
+input[type="radio"][value="5"]:checked {
+    content: url('critterkeeper/assets/images/5.png');
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    border: 3px solid black;
+    border-bottom: 3px dotted white;
+}
+
+.effects {
+    float: left;
+    display: block;
+    width: 50%;
+    text-align: center;
+}
+
+label {
+    display: block;
+}
+
+.symptom-container {
+    width: 300px;
+}
+
+#notes {
+    width: 100%;
+}
+
+#drains, #supports {
+    width: 100%;
+    text-align: center;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
