@@ -3,7 +3,7 @@ import {
   StandardFieldProps,
   DurationField,
   FieldNode,
-} from "../../../constants/nodeTypes";
+} from "../../../constants/NodeTypes";
 import { useTheme } from "../../../hooks/use-theme-provider";
 
 export default function DurationInputField({

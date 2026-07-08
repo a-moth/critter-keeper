@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Text, View } from "react-native";
 import BooleanImageInput from "./BooleanImageInput";
 import { useTheme } from "../../../hooks/use-theme-provider";
-import { ScaleField, StandardFieldProps } from "../../../constants/nodeTypes";
+import { ScaleField, StandardFieldProps } from "../../../constants/NodeTypes";
 
 export default function ScaleInputField({
   template,

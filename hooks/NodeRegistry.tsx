@@ -10,12 +10,12 @@ const nodeRegistry = {
 // the default values for defaultTemplate
 
 // the default values for every node and input
-type FieldDefinition = {
-  component: React.ComponentType<any>;
+type NodeDefinition = {
+  component: React.ComponentType<Node>;
   defaultConfig: Record<string, string>;
   validate: (config: Record<string, string>) => string[];
 };
 
-const fieldDefinitions: Record<string, FieldDefinition> = {
+const fieldDefinitions: Record<string, NodeDefinition> = {
 
 };

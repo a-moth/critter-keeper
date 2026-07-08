@@ -7,7 +7,7 @@
  */
 
 import { ScrollView, Text } from "react-native";
-import { FieldNode, Node, SectionNode, Template } from '../../../constants/nodeTypes';
+import { FieldNode, Node, SectionNode, Template } from '../../../constants/NodeTypes';
 import ValidationPreview from "./ValidationPreview";
 import EditorControls from "./EditorControls";
 import { ReactNode } from "react";

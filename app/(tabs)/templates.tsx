@@ -10,6 +10,7 @@ import { router } from "expo-router";
 export default function TemplatesScreen() {
     const { updateSetting } = useSettings();
 
+    //TODO rename this stupid name to something useful
     function NewTemplate1() {
         let currentTemplateId = "template" + uuidv4();
 

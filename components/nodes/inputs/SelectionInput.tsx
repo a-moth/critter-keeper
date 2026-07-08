@@ -4,7 +4,7 @@
 import { Component } from "react";
 import { TextStyle, View, Text } from 'react-native';
 import MultiSelect from "react-native-multiple-select";
-import { FieldNode, SelectionField, Template } from "../../../constants/nodeTypes";
+import { FieldNode, SelectionField, Template } from "../../../constants/NodeTypes";
 
 export interface Item {
   id: string;

@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
 import BooleanInput from "./BooleanInput";
 import { useTheme } from "../../../hooks/use-theme-provider";
-import { ToggleButtonField, StandardFieldProps, FieldNode } from "../../../constants/nodeTypes";
+import { ToggleButtonField, StandardFieldProps, FieldNode } from "../../../constants/NodeTypes";
 
 export default function BooleanInputField({
   template,

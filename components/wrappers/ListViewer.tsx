@@ -3,10 +3,10 @@ import { Button, View, Text } from "react-native";
 import { useTheme } from "../../hooks/use-theme-provider";
 import { useSettings } from "../../utils/SettingsProvider";
 import { deleteEntry, deleteTemplate, getData, getEntries, getTemplates, saveData, } from '../../utils/StorageUtil';
-import { Template, Templates, Entries, Entry, FieldValue, SectionNode, TextField, SelectionField, FieldNode, Node } from "../../constants/nodeTypes"
-import valueOf from "../../lib/valueOf";
+import { Template, Templates, Entries, Entry, FieldValue, SectionNode, TextField, SelectionField, FieldNode, Node } from "../../constants/NodeTypes"
+import valueOf from "../../utils/valueOf";
 import { useRouter } from "expo-router";
-import { onHandleChange } from "../../utils/nodeUtils";
+import { onHandleChange } from "../../utils/NodeUtils";
 import TemplateEditorManager from "../managers/TemplateEditorManager";
 
 type ListViewerProps = {
@@ -15,10 +15,8 @@ type ListViewerProps = {
 
 //TODO: test this entire setup after refactoring into generic type
 
-// A strict, pure-web debounce callback hook that requires no Node types
-// TODO: test this function
+// TODO: test this function, make it make sense
 function useDebounceCallback<T extends (...args: any[]) => void>(callback: T, delay: number) {
-    // Using ReturnType<typeof setTimeout> dynamically resolves to whatever your environment uses
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const callbackRef = useRef(callback);
 
@@ -48,7 +46,6 @@ export default function ListViewer({
     const [data, setData] = useState<Templates | Entries>();
     const [_isLoading, setLoading] = useState(false);
 
-    // 1. Always declare hooks unconditionally at the very top of your component
     const [entryCountState] = useState(() =>
         valueOf(settings?.settings?.[`**listEntryCount` as keyof typeof settings.settings]) ?? Infinity
     );
@@ -82,11 +79,11 @@ export default function ListViewer({
         return () => { cancelled = true; };
     }, []);
 
-    // 1. Compute ONLY the raw data array using useMemo
+    // TODO make this make sense
     const sortedTemplateData = useMemo(() => {
         if (!data) return [];
 
-        // entries usedTime is creation time
+        //TODO entries and templates have the same properties. eventually combine them into one object
         return Object.values(data)
             .sort((a, b) => {
                 const bTime = b?.metadata?.lastModified ?? 0;
@@ -102,13 +99,12 @@ export default function ListViewer({
     if (type === "entry") {
         listCount = entryCountState;
     } else {
-        // Falls back to Infinity if type is "template" or anything else
         listCount = Infinity;
     }
 
     let count = showCountState;
 
-    // 2. Separate renaming into two actions: immediate text update vs. debounced sort update
+    // TODO this code does nothing now. fix.
     async function renameTemplateTextOnly(id: string, name: string) {
         if (!data) return;
 
@@ -125,21 +121,9 @@ export default function ListViewer({
         };
 
         setData(updatedData);
-
-        // Optional: Save to local storage/API immediately or debounce this too
-        try {
-            const appData = await getData();
-            if (type == "entry") {
-                await saveData({ ...appData, entries: updatedData });
-            } else {
-                await saveData({ ...appData, templates: updatedData });
-            }
-        } catch (err) {
-            console.error("Failed to save renamed item name text:", err);
-        }
     }
 
-    // 3. This function handles the timestamp bump that triggers the re-sort
+    //TODO this borrowed code does nothing now. fix
     const triggerSortUpdate = useDebounceCallback(async (id: string) => {
         setData(prev => {
             if (!prev || !prev[id]) return prev;
@@ -172,7 +156,7 @@ export default function ListViewer({
         } catch (err) {
             console.error("Failed to save item sort timestamp:", err);
         }
-    }, 1200); // 1.2 seconds after the user stops typing
+    }, 1200);
 
     async function deleteId(id: string) {
         if (type === "entry") {
@@ -204,7 +188,7 @@ export default function ListViewer({
         }
     }
 
-    // 2. Keep the sub-component completely isolated
+    //TODO make this name make sense with a comment
     function TemplateRow({ item }: { item: Template }) {
         return (
             <View style={[theme.sizes.default.row, theme.sizes.default.fillContainer, theme.sizes.default.alignCenter]}>
@@ -229,7 +213,7 @@ export default function ListViewer({
         );
     }
 
-    // 2. Keep the sub-component completely isolated
+    //TODO make this make sense with a comment
     function EntryRow({ item }: { item: Entry }) {
         return (
             <View style={[theme.sizes.default.row, theme.sizes.default.fillContainer, theme.sizes.default.alignCenter]}>

@@ -1,4 +1,4 @@
-import { FieldNode, NumberField } from '../../../constants/nodeTypes';
+import { FieldNode, NumberField } from '../../../constants/NodeTypes';
 import { useTheme } from '../../../hooks/use-theme-provider';
 import { useSettings } from '../../../utils/SettingsProvider';
 import { Text, TextInput, View } from 'react-native';

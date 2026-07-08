@@ -20,13 +20,13 @@ import {
     defaultTemplate,
     Template,
     FieldNode,
-} from "../../constants/nodeTypes"
+} from "../../constants/NodeTypes"
 
 import { useTheme }
     from "../../hooks/use-theme-provider";
 import { useRouter } from "expo-router";
 import TemplateEditorManager from "../managers/TemplateEditorManager";
-import { onHandleChange } from "../../utils/nodeUtils";
+import { onHandleChange } from "../../utils/NodeUtils";
 
 type Props = {
     templateId: string;

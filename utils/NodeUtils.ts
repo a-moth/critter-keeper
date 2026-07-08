@@ -1,4 +1,4 @@
-import { Entry, Node, Template } from '../constants/nodeTypes';
+import { Entry, Node, Template } from '../constants/NodeTypes';
 
 export function getOrderedNodes(tree: Template | Entry): Node[] {
   return tree.metadata.order.map(id => tree.fields[id]).filter(Boolean);

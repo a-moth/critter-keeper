@@ -1,4 +1,4 @@
-import { Node } from "../../../constants/nodeTypes";
+import { Node } from "../../../constants/NodeTypes";
 import { Text } from "react-native";
 
 export default function ValidationPreview({ field }: { field: Node }) {

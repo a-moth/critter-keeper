@@ -14,7 +14,7 @@ import {
   FieldNode,
   StandardFieldProps,
   TextField,
-} from "../../../constants/nodeTypes";
+} from "../../../constants/NodeTypes";
 
 export default function TextInputField({
   id,

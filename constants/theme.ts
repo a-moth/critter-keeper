@@ -4,41 +4,8 @@
  */
 // constants/theme.ts
 
-import {
-  TextStyle,
-  ViewStyle,
-  ImageStyle,
-} from "react-native";
-
-const tintColorLight = "#81a77f";
-const tintColorDark = "#50756b";
-
-export const Colors = {
-  light: {
-    text: "#11181C",
-    background: "#d3d3d3",
-    card: "#ffffff",
-    border: "#cfcfcf",
-    primary: tintColorLight,
-    icon: "#687076",
-    notification: tintColorLight,
-    tabIconDefault: "#687076",
-    tabIconSelected: tintColorLight,
-  },
-
-  dark: {
-    text: "#ECEDEE",
-    background: "#151718",
-    card: "#202325",
-    border: "#303336",
-    primary: tintColorDark,
-    icon: "#9BA1A6",
-    notification: tintColorDark,
-    tabIconDefault: "#9BA1A6",
-    tabIconSelected: tintColorDark,
-  },
-}
-
+import { TextStyle, ViewStyle, ImageStyle } from 'react-native';
+//TODO: fix Sizes to make actual sense instead of just old groups of CSS classes that are messy
 export const Sizes = {
   default: {
     container: {
@@ -47,18 +14,18 @@ export const Sizes = {
     } as ViewStyle,
 
     row: {
-      flexDirection: "row",
-      flexWrap: "wrap",
+      flexDirection: 'row',
+      flexWrap: 'wrap',
     } as ViewStyle,
 
     column: {
-      flexDirection: "column",
-      flexWrap: "wrap"
+      flexDirection: 'column',
+      flexWrap: 'wrap',
     } as ViewStyle,
 
     alignCenter: {
-      alignItems: "center",
-      justifyContent: "center",
+      alignItems: 'center',
+      justifyContent: 'center',
     } as ViewStyle,
 
     button: {
@@ -77,11 +44,11 @@ export const Sizes = {
 
     buttonText: {
       fontSize: 18,
-      fontWeight: "bold",
+      fontWeight: 'bold',
     } as TextStyle,
 
     textCenter: {
-      textAlign: "center",
+      textAlign: 'center',
     } as TextStyle,
 
     listMinItem: {
@@ -90,8 +57,8 @@ export const Sizes = {
     },
 
     fillContainer: {
-        minHeight: 100,
-        minWidth: "100%",
+      minHeight: 100,
+      minWidth: '100%',
     } as ViewStyle,
 
     image: {
@@ -116,42 +83,42 @@ export const Sizes = {
     } as TextStyle,
 
     bold: {
-      fontWeight: "bold",
+      fontWeight: 'bold',
     } as TextStyle,
 
     currentContainerStyle: {
       padding: 16,
-      minHeight: "100%",
+      minHeight: '100%',
     } as ViewStyle,
 
     entryListContainer: {
-      flex: .3 / 2,
-      minHeight: "auto",
+      flex: 0.3 / 2,
+      minHeight: 'auto',
     } as ViewStyle,
 
     entryEditButton: {
-      flex: .1,
+      flex: 0.1,
     } as ViewStyle,
 
     entryViewer: {
-      flex: .5,
+      flex: 0.5,
     },
 
     dropdownButtonStyle: {
       width: 200,
       height: 50,
-      backgroundColor: "#a1a1a1",
+      backgroundColor: '#a1a1a1',
       borderRadius: 12,
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
       paddingHorizontal: 12,
     },
     dropdownButtonTxtStyle: {
       flex: 1,
       fontSize: 18,
-      fontWeight: "500",
-      color: "#151E26",
+      fontWeight: '500',
+      color: '#151E26',
     },
     dropdownButtonArrowStyle: {
       fontSize: 28,
@@ -161,22 +128,22 @@ export const Sizes = {
       marginRight: 8,
     },
     dropdownMenuStyle: {
-      backgroundColor: "#E9ECEF",
+      backgroundColor: '#E9ECEF',
       borderRadius: 8,
     },
     dropdownItemStyle: {
-      width: "100%",
-      flexDirection: "row",
+      width: '100%',
+      flexDirection: 'row',
       paddingHorizontal: 12,
-      justifyContent: "center",
-      alignItems: "center",
+      justifyContent: 'center',
+      alignItems: 'center',
       paddingVertical: 8,
     },
     dropdownItemTxtStyle: {
       flex: 1,
       fontSize: 18,
-      fontWeight: "500",
-      color: "#151E26",
+      fontWeight: '500',
+      color: '#151E26',
     },
     dropdownItemIconStyle: {
       fontSize: 28,
@@ -184,35 +151,3 @@ export const Sizes = {
     },
   },
 };
-
-export type AppColors = typeof Colors;
-
-export type AppSizes =
-  typeof Sizes.default;
-
-export type ThemeContextType = {
-  fonts: any;
-  dark: boolean;
-  colors: typeof Colors.light | typeof Colors.dark;
-  sizes: AppSizes;
-  toggleTheme: () => void;
-};
-
-export function buildTheme(
-  mode: "light" | "dark",
-  size: "default"
-): ThemeContextType {
-  const colors = Colors[mode];
-  const sizes = Sizes[size];
-  return {
-    dark: mode === "dark",
-    toggleTheme: () => {
-      
-    },
-    fonts: "",
-    colors: colors,
-    sizes: sizes,
-  }
-}
-
-//todo: fill in size constraints for each size

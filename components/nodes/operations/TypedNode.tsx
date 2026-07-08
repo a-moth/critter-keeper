@@ -1,4 +1,4 @@
-import { FieldNode, Template } from '../../../constants/nodeTypes';
+import { FieldNode, Template } from '../../../constants/NodeTypes';
 import BooleanInputField from '../inputs/BooleanInputField';
 import DateInputField from '../inputs/DateInputField';
 import DurationInputField from '../inputs/DurationInputField';

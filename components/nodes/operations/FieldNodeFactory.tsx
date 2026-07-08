@@ -1,4 +1,4 @@
-import { FieldNode, Template } from "../../../constants/nodeTypes";
+import { FieldNode, Template } from "../../../constants/NodeTypes";
 import TypedNode from "./TypedNode";
 import EditorControls from "./EditorControls";
 import ValidationPreview from "./ValidationPreview";

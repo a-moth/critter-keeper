@@ -13,6 +13,7 @@ export default function HomeScreen() {
 
     const router = useRouter();
 
+    // TODO rename this dumb name to something useful
     async function NewEntry1(templateId?: string) {
         let currentId = "entry" + uuidv4();
 

@@ -1,7 +1,7 @@
-import { FieldNode, Node, SectionNode, selectionField, SelectionField, Template } from '../../constants/nodeTypes';
+import { FieldNode, Node, SectionNode, selectionField, SelectionField, Template } from '../../constants/NodeTypes';
 import FieldNodeFactory from '../nodes/operations/FieldNodeFactory';
 import SectionNodeFactory from '../nodes/operations/SectionNodeFactory';
-import { createId, insertNodeAfter, isSectionNode, moveNodeDown, moveNodeUp, removeNode } from '../../utils/nodeUtils';
+import { createId, insertNodeAfter, isSectionNode, moveNodeDown, moveNodeUp, removeNode } from '../../utils/NodeUtils';
 
 //You need:
 
@@ -85,6 +85,9 @@ export default function TemplateEditorManager({
     <>
       {template &&
         Object.entries(template.fields).map(([nodeKey, node]) => {
+
+          // Future autosave?
+
           function moveUp() {
             moveNodeUp(template, node.id);
           }

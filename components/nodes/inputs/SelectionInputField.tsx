@@ -1,5 +1,5 @@
 import { Text, TextStyle, View } from "react-native";
-import { StandardFieldProps, SelectionField } from "../../../constants/nodeTypes";
+import { StandardFieldProps, SelectionField } from "../../../constants/NodeTypes";
 import SelectionInput from "./SelectionInput";
 import { useTheme } from "../../../hooks/use-theme-provider";
 

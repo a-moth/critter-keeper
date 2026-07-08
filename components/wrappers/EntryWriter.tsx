@@ -21,7 +21,7 @@ import {
   FieldNode,
   Template,
   defaultTemplate
-} from "../../constants/nodeTypes"
+} from "../../constants/NodeTypes"
 
 import { useTheme }
   from "../../hooks/use-theme-provider";
@@ -30,7 +30,7 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "expo-router";
 import TemplateEditorManager from "../managers/TemplateEditorManager";
-import { onHandleChange } from "../../utils/nodeUtils";
+import { onHandleChange } from "../../utils/NodeUtils";
 
 type Props = {
   base?: string;

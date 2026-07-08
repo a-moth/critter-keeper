@@ -3,7 +3,7 @@ import { useSettings } from "../../utils/SettingsProvider";
 import SettingInputField from "../nodes/inputs/SettingInputField";
 import NumberInputField from "../nodes/inputs/NumberInputField";
 import TimeInputField from "../nodes/inputs/TimeInputField";
-import { Template, Node, FieldNode } from "../../constants/nodeTypes";
+import { Template, Node, FieldNode } from "../../constants/NodeTypes";
 
 export type CommonProps = { // put this in a constants file?
     template: Template | null;

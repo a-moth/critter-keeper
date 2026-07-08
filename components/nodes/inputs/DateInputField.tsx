@@ -12,7 +12,7 @@ import {
   DateField,
   FieldNode,
   StandardFieldProps,
-} from "../../../constants/nodeTypes";
+} from "../../../constants/NodeTypes";
 
 import { useSettings } from "../../../utils/SettingsProvider";
 

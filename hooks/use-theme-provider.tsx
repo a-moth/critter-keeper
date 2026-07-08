@@ -6,6 +6,7 @@ import { useColorScheme } from "react-native";
 
 import { Sizes } from "../constants/theme";
 
+// transfer the static fields to @theme.ts
 const palettes = {
   light: catppuccin.flavors.latte,
   dark: catppuccin.flavors.macchiato,
