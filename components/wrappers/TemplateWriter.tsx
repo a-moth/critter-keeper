@@ -117,6 +117,7 @@ export default function TemplateWriter({
         >
 
             <TemplateEditorManager
+                isList={false}
                 template={templateRef.current}
                 locked={false}
                 edit={true}

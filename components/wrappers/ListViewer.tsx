@@ -4,9 +4,9 @@ import { useTheme } from "../../hooks/use-theme-provider";
 import { useSettings } from "../../utils/SettingsProvider";
 import { deleteEntry, deleteTemplate, getData, getEntries, getTemplates, saveData, } from '../../utils/StorageUtil';
 import { Template, Templates, Entries, Entry, FieldValue, SectionNode, TextField, SelectionField, FieldNode, Node } from "../../constants/NodeTypes"
-import valueOf from "../../utils/valueOf";
+import valueOf from "../../utils/generic-calls";
 import { useRouter } from "expo-router";
-import { onHandleChange } from "../../utils/NodeUtils";
+import { createId } from "../../utils/NodeUtils";
 import TemplateEditorManager from "../managers/TemplateEditorManager";
 
 type ListViewerProps = {
@@ -190,6 +190,10 @@ export default function ListViewer({
 
     //TODO make this name make sense with a comment
     function TemplateRow({ item }: { item: Template }) {
+        function onChange(template: Template | null, defaultShown: boolean, newValue: FieldNode) {
+            onHandleChange(template, defaultShown, newValue);
+        }
+
         return (
             <View style={[theme.sizes.default.row, theme.sizes.default.fillContainer, theme.sizes.default.alignCenter]}>
                 <View style={theme.sizes.default.entryEditButton}>
@@ -198,15 +202,8 @@ export default function ListViewer({
                 </View>
 
                 <View style={[theme.sizes.default.entryViewer, theme.sizes.default.listMinItem, { backgroundColor: theme.colors.primary }]}>
-                    {item &&
-                        Object.entries(item.fields).map(([nodeKey, node]) => {
-
-                            function onChange(template: Template | null, defaultShown: boolean, newValue: FieldNode) {
-                                onHandleChange(template, defaultShown, newValue);
-                            }
-
-                            return <TemplateEditorManager key={node.id} template={item} locked={true} edit={false} onChange={onChange} />
-                        })
+                    {
+                        <TemplateEditorManager key={createId()} template={item} locked={true} edit={false} isList={true} onChange={onChange} />
                     }
                 </View>
             </View>
@@ -215,6 +212,10 @@ export default function ListViewer({
 
     //TODO make this make sense with a comment
     function EntryRow({ item }: { item: Entry }) {
+        function onChange(template: Template | null, defaultShown: boolean, newValue: FieldNode) {
+            onHandleChange(template, defaultShown, newValue);
+        }
+
         return (
             <View style={[theme.sizes.default.row, theme.sizes.default.fillContainer, theme.sizes.default.alignCenter]}>
                 <View style={theme.sizes.default.entryEditButton}>
@@ -223,16 +224,7 @@ export default function ListViewer({
                 </View>
 
                 <View style={[theme.sizes.default.entryViewer, theme.sizes.default.listMinItem, { backgroundColor: theme.colors.primary }]}>
-                    {item &&
-                        Object.entries(item.fields).splice(listCount).map(([nodeKey, node]) => {
-
-                            function onChange(template: Template | null, defaultShown: boolean, newValue: FieldNode) {
-                                onHandleChange(template, defaultShown, newValue);
-                            }
-
-                            return <TemplateEditorManager template={item} locked={true} edit={false} onChange={onChange} />
-                        })
-                    }
+                    <TemplateEditorManager template={item} locked={true} edit={false} isList={true} onChange={onChange} />
                 </View>
             </View>
         );
@@ -261,7 +253,7 @@ export default function ListViewer({
 
     return (
         <View style={[theme.sizes.default.row, theme.sizes.default.fillContainer, theme.sizes.default.alignCenter]}>
-            {sortedTemplateData.map((value) => {
+            {sortedTemplateData.slice(0, listCount).map((value) => {
                 if (!value?.metadata) return null;
                 if (type === "entry") {
                     return (

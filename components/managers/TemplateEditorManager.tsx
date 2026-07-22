@@ -1,7 +1,10 @@
-import { FieldNode, Node, SectionNode, selectionField, SelectionField, Template } from '../../constants/NodeTypes';
+import { selectionField, } from '../../constants/NodeTypes';
 import FieldNodeFactory from '../nodes/operations/FieldNodeFactory';
 import SectionNodeFactory from '../nodes/operations/SectionNodeFactory';
-import { createId, insertNodeAfter, isSectionNode, moveNodeDown, moveNodeUp, removeNode } from '../../utils/NodeUtils';
+import { createId, isSectionNode, } from '../../utils/NodeUtils';
+import { useSettings } from '../../utils/SettingsProvider';
+import valueOf from '../../utils/generic-calls';
+import { data_container_types, DataContainer, entry, field_data, field_node, FieldData, SectionData, SectionField, SelectionField, template, TextField, SelectionData, FieldNode } from '../../constants/DataTypes';
 
 //You need:
 
@@ -67,79 +70,104 @@ import { createId, insertNodeAfter, isSectionNode, moveNodeDown, moveNodeUp, rem
  */
 
 export default function TemplateEditorManager({
+  isList,
   template,
   edit,
   locked,
   onChange,
 }: {
-  template: Template | null;
+  isList: boolean;
+  template: DataContainer<data_container_types> | null;
   edit: boolean;
   locked: boolean;
   onChange: (
-    template: Template | null,
+    template: DataContainer<data_container_types> | null,
     defaultShown: boolean,
-    value: FieldNode
+    value: field_node<FieldData>
   ) => void;
 }) {
+  const { settings } = useSettings();
+
   return (
     <>
       {template &&
-        Object.entries(template.fields).map(([nodeKey, node]) => {
-
+        Object.entries(template?.getData().fields).slice(0, isList ? valueOf(settings?.["**showCount"]) ?? 10 : undefined).map(([nodeKey, node]) => {
+          let actualNode = template?.getData().fields[nodeKey];
           // Future autosave?
-
-          function moveUp() {
-            moveNodeUp(template, node.id);
-          }
-
-          function moveDown() {
-            moveNodeDown(template, node.id);
-          }
-
-          function deleteNode() {
-            removeNode(template, node.id);
-          }
 
           function addField() {
             // insert this after fieldnode of field
-            let nodeValue: SelectionField = {
+            let nodeValue: SelectionField = new SelectionField({
               type: "selection",
               label: "Add Field to " + createId(),
               multiple: selectionField.multiple,
               selected: selectionField.selected,
               options: selectionField.options,
               visible: selectionField.visible,
+            });
+
+            let fieldValue: field_data<FieldData> | undefined;
+            switch (nodeValue.data.selected[0]) {
+              case "text":
+                fieldValue = new TextField({
+                  label: "text-field",
+                  type: "text",
+                  visible: true,
+                  value: "",
+                });
+                break;
+              case "section":
+                fieldValue = new SectionField({
+                  type: "section",
+                  label: "section-field",
+                  visible: true,
+                  orientation: "row",
+                  id: createId(),
+                  childNodes: {}
+                });
+                break;
+              case "selection":
+                fieldValue = new SelectionField({
+                  type: "selection",
+                  label: "selection-field",
+                  visible: true,
+                  multiple: false,
+                  selected: [],
+                  options: [],
+                });
             }
 
-            let fieldValue: FieldNode = {
-              id: nodeValue.label,
-              type: "field",
-              field: nodeValue,
-            }
-
-            insertNodeAfter(template, nodeKey, fieldValue as Node);
-          };
-
-          function addSection() {
-            let sectionValue: SectionNode = {
-              id: createId(),
-              type: "section",
-              title: "Section",
-              orientation: "row",
-              childNodes: {}
-            }
-
-            insertNodeAfter(template, nodeKey, sectionValue as Node);
+            if (fieldValue)
+              template?.insertNodeAfter(template, nodeKey, fieldValue as field_node<FieldData>);
           }
 
-          if (isSectionNode(node)) {
+          function addSection() {
+            let sectionValue: SectionField = new SectionField({
+              id: createId(),
+              type: "section",
+              label: "section-field",
+              orientation: "row",
+              childNodes: {},
+              visible: true,
+            });
+
+            let sectionFieldNode = {
+              field: sectionValue,
+              type: "field",
+              id: createId(),
+            } as FieldNode<SectionData>;
+
+            template?.insertNodeAfter(template, nodeKey, sectionFieldNode);
+          }
+
+          if (isSectionNode(actualNode)) {
             return (
-              <SectionNodeFactory template={template} id={node.id} locked={locked} edit={edit} key={nodeKey} nodeKey={nodeKey} section={node} onChange={onChange} addField={addField} addSection={addSection} moveUp={moveUp} moveDown={moveDown} deleteNode={deleteNode} />
+              <SectionNodeFactory template={template} id={actualNode.id} locked={locked} edit={edit} key={nodeKey} nodeKey={nodeKey} section={actualNode} onChange={onChange} addField={addField} addSection={addSection} moveUp={actualNode.moveUp} moveDown={actualNode.moveDown} deleteNode={actualNode.deleteNode} />
             );
           }
 
           return (
-            <FieldNodeFactory template={template} id={node.id} locked={locked} edit={edit} key={nodeKey} nodeKey={nodeKey} field={node} onChange={onChange} addField={addField} addSection={addSection} moveUp={moveUp} moveDown={moveDown} deleteNode={deleteNode} />
+            <FieldNodeFactory template={template} id={actualNode.id} locked={locked} edit={edit} key={nodeKey} nodeKey={nodeKey} field={actualNode} onChange={onChange} addField={addField} addSection={addSection} moveUp={actualNode.moveUp} moveDown={actualNode.moveDown} deleteNode={actualNode.deleteNode} />
           );
         })
       }

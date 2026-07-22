@@ -14,7 +14,7 @@ export type CommonProps = { // put this in a constants file?
     onChange?: (template: Template, defaultShown: boolean, newValue: Node) => void;
 };
 
-export default function EntryManager({
+export default function SettingManager({
     template,
     id,
     field,
@@ -43,3 +43,4 @@ export default function EntryManager({
             return <SettingInputField {...commonProps} />;
     }
 }
+//TODO: decide whether to send this through typednode/fieldnodefactory/sectionnodefactory/etc setup or no

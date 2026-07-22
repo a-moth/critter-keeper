@@ -12,7 +12,7 @@ export default function SettingsReader() {
   return (
     <ScrollView contentContainerStyle={{ padding: 16 }}>
       {Object.keys(settings).map(key => (
-        < SettingManager template={null} id={key} field={null} key={key} fieldKey={key} defaultShown={key.charAt(0) === "*"} />
+        <SettingManager template={null} id={key} field={null} key={key} fieldKey={key} defaultShown={key.charAt(0) === "*"} />
       ))}
     </ScrollView>
   );

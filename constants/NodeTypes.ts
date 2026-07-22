@@ -1,189 +1,19 @@
 import { Image } from 'react-native';
-
-export type Templates = Record<string, Template>;
-
-export type Template = {
-  metadata: {
-    templateId: string;
-    entryId: string | null;
-    name: string;
-    lastModified: number;
-    usedTime: number | null;
-    order: string[];
-  };
-
-  fields: Record<string, Node>;
-};
-
-/**
- * Field Types
- */
-
-export type TextField = {
-  type: 'text';
-  value: string;
-  label: string;
-  visible: boolean;
-};
-
-export type NumberField = {
-  type: 'number';
-  value: number;
-  label: string;
-  visible: boolean;
-};
-
-export type TimeField = {
-  type: 'time';
-  value: string;
-  label: string;
-  format?: string; // REGEX? from settings, just to validate
-  visible: boolean;
-};
-
-export type DateField = {
-  type: 'date';
-  value: string;
-  label: string;
-  format?: string; // REGEX? from settings, just to validate
-  visible: boolean;
-};
-
-export type DurationField = {
-  type: 'duration';
-  label: string;
-  valueA: number; // allowed to be 0, must be an unsigned int
-  valueB: number; // allowed to be 0, must be an unsigned int
-  unitA: string;
-  unitB: string;
-  visible: boolean;
-};
-
-export type SelectionField = {
-  type: 'selection';
-  label: string;
-  multiple: boolean;
-  selected: string[]; // the actual value
-  options: any[]; // the choices
-  visible: boolean;
-};
-
-export type ScaleField = {
-  type: 'scale';
-  value: number;
-  imageBased: boolean; // create more varied range for 1-10 instead of just 1-5
-  min: number; // unsigned int, allowed to be 0
-  max: number; // unsigned int, allowed to be 0
-  label: string;
-  visible: boolean;
-};
-
-export type ToggleButtonField = {
-  type: 'boolean';
-  value: boolean;
-  label: string;
-  labelSelected: string;
-  labelUnselected: string;
-  visible: boolean;
-};
-
-export type ToggleImageButtonField = {
-  type: 'image-boolean';
-  value: boolean;
-  label: string;
-  imageSelected: typeof Image;
-  imageUnselected: typeof Image;
-  visible: boolean;
-};
-
-export type SettingsField = TextField;
-
-export type FieldValue =
-  | TextField
-  | DateField
-  | DurationField
-  | SelectionField
-  | ScaleField
-  | ToggleButtonField
-  | ToggleImageButtonField
-  | TimeField
-  | NumberField
-  | SettingsField;
-
-export type FieldType = FieldValue;
-
-export type FieldNode = {
-  id: string;
-  type: 'field';
-  field: FieldValue;
-};
-
-export type SectionNode = {
-  id: string;
-  type: 'section';
-  title: string;
-  orientation: 'column' | 'row';
-  childNodes: Record<string, Node>;
-};
-
-export type Node = FieldNode | SectionNode;
-
-/**
- * Base Props
- */
-
-export type BaseFieldProps = {
-  id: string;
-  template: Template;
-  fieldKey: string;
-  defaultShown: boolean;
-  locked: boolean;
-
-  onChange?: (
-    template: Template,
-    defaultShown: boolean,
-    newValue: FieldNode,
-  ) => void;
-};
-
-/**
- * Generic Typed Props
- */
-
-export type StandardFieldProps<T extends FieldType> = BaseFieldProps & {
-  field: T;
-};
-
-/**
- * Entries Object Definition
- */
-export type Entry = {
-  metadata: {
-    templateId: string;
-    entryId: string;
-    name: string;
-    lastModified: number;
-    usedTime: number | null;
-    order: string[];
-  };
-
-  fields: Record<string, Node>;
-};
-
-export type Entries = Record<string, Entry>;
+import { field_node, TextField } from './DataTypes';
 
 /**
  * Default Template Definitions
  * [private to this types config]
  */
 
-const TextInput1: TextField = {
+const TextInput1: TextField = new TextField({
   type: 'text',
   value: 'something has gone wrong',
   label: 'Text Input 1',
   visible: true,
-};
+});
 
+// TODO: convert to instances
 const DurationInput1: DurationField = {
   type: 'duration',
   label: 'Duration Input 1',
@@ -266,7 +96,7 @@ const DateInput1: DateField = {
   type: 'date',
   value: '01-05-2001',
   label: 'Date Input 1',
-  format: 'DD-MM-YYYY',
+  format: 'dd-MM-YYYY',
   visible: true,
 };
 
@@ -328,7 +158,7 @@ const Section1: SectionNode = createSectionNode('Testing Section', 'row', {
 /**
  * Public constant containing the initialisation of the core Journal Template
  */
-export const defaultTemplate: Template = {
+export const tempTemplate: Template = {
   metadata: {
     templateId: '9834fa2e-4392-407f-9672-95b82d2868a7',
     entryId: null,
@@ -349,6 +179,40 @@ export const defaultTemplate: Template = {
     DateInput1: createFieldNode(DateInput1),
     BooleanInput1: createFieldNode(BooleanInput1),
     Section1,
+  },
+} as const;
+
+export const defaultTemplate = {
+  metadata: {
+    templateId: tempTemplate.metadata.templateId,
+    entryId: tempTemplate.metadata.entryId,
+    name: tempTemplate.metadata.name,
+    lastModified: tempTemplate.metadata.lastModified,
+    usedTime: tempTemplate.metadata.usedTime,
+    order: [
+      tempTemplate.fields.TextInput1.id,
+      tempTemplate.fields.DurationInput1.id,
+      tempTemplate.fields.ScaleInput1.id,
+      tempTemplate.fields.SelectionInput1.id,
+      tempTemplate.fields.SelectionInput2.id,
+      tempTemplate.fields.SelectionInput3.id,
+      tempTemplate.fields.SelectionInput4.id,
+      tempTemplate.fields.DateInput1.id,
+      tempTemplate.fields.BooleanInput1.id,
+      tempTemplate.fields.Section1.id,
+    ],
+  },
+  fields: {
+    TextInput1: tempTemplate.fields.TextInput1,
+    DurationInput1: tempTemplate.fields.DurationInput1,
+    ScaleInput1: tempTemplate.fields.ScaleInput1,
+    SelectionInput1: tempTemplate.fields.SelectionInput1,
+    SelectionInput2: tempTemplate.fields.SelectionInput2,
+    SelectionInput3: tempTemplate.fields.SelectionInput3,
+    SelectionInput4: tempTemplate.fields.SelectionInput4,
+    DateInput1: tempTemplate.fields.DateInput1,
+    BooleanInput1: tempTemplate.fields.BooleanInput1,
+    Section1: tempTemplate.fields.Section1,
   },
 } as const;
 

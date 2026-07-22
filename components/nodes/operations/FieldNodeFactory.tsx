@@ -28,7 +28,6 @@ export default function FieldNodeFactory({ template, id, edit, nodeKey, locked, 
             <TypedNode
                 template={template}
                 id={id}
-                key={nodeKey}
                 field={field}
                 locked={locked}
                 onChange={onChange}
@@ -40,7 +39,6 @@ export default function FieldNodeFactory({ template, id, edit, nodeKey, locked, 
             <TypedNode
                 template={template}
                 id={id}
-                key={nodeKey}
                 field={field}
                 locked={locked}
                 onChange={onChange}

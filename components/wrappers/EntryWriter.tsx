@@ -74,7 +74,7 @@ export default function EntryWriter({
 
       setEntryData({
         metadata: {
-          templateId: templateData?.metadata.templateId ?? defaultTemplate.metadata.templateId,
+          templateId: templateData?.metadata?.templateId ?? defaultTemplate.metadata.templateId,
           entryId: base ?? "entry" + uuidv4(),
           name: base ?? "entry" + uuidv4(),
           lastModified: Date.now(),
@@ -158,6 +158,7 @@ export default function EntryWriter({
     >
 
       <TemplateEditorManager
+        isList={false}
         template={entryData}
         locked={false}
         edit={false}
@@ -175,7 +176,7 @@ export default function EntryWriter({
           title={
             saving
               ? "Saving..."
-              : "Save Template"
+              : "Save Entry"
           }
           onPress={
             handleSave

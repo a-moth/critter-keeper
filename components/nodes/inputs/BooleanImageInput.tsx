@@ -2,6 +2,7 @@
 /**
  * TODO: test component and ensure it works, presents, and is functional in the intended way
  * TODO: load loaded images in from files somehow
+ * TODO: load images async with alt text until they load
  */
 
 // components/BooleanInput.tsx
