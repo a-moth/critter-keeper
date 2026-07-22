@@ -416,6 +416,9 @@ export abstract class field_data<T extends FieldData> {
 
     abstract setData(newData: any): void;
     abstract getData(): any;
+    abstract moveUp: () => void;
+    abstract moveDown: () => void;
+    abstract deleteNode: () => void;
 }
 
 export type FieldNode<T extends FieldData> = {
@@ -442,6 +445,9 @@ export class TextField extends field_data<TextData> {
     getData() {
         return this.data.value;
     }
+    moveUp: () => void;
+    moveDown: () => void;
+    deleteNode: () => void;
 }
 
 export class SectionField extends field_data<SectionData> {
@@ -464,6 +470,9 @@ export class SectionField extends field_data<SectionData> {
     getData() {
         return this.data.childNodes;
     }
+    moveUp: () => void;
+    moveDown: () => void;
+    deleteNode: () => void;
 }
 
 export class SelectionField extends field_data<SelectionData> {
@@ -486,6 +495,9 @@ export class SelectionField extends field_data<SelectionData> {
     getData() {
         return this.data.selected;
     }
+    moveUp: () => void;
+    moveDown: () => void;
+    deleteNode: () => void;
 }
 
 /**

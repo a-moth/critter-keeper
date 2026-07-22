@@ -4,7 +4,7 @@ import SectionNodeFactory from '../nodes/operations/SectionNodeFactory';
 import { createId, isSectionNode, } from '../../utils/NodeUtils';
 import { useSettings } from '../../utils/SettingsProvider';
 import valueOf from '../../utils/generic-calls';
-import { data_container_types, DataContainer, entry, field_data, field_node, FieldData, SectionData, SectionField, SelectionField, template, TextField, SelectionData, FieldNode } from '../../constants/DataTypes';
+import { data_container_types, DataContainer, entry, field_data, FieldData, SectionData, SectionField, SelectionField, template, TextField, SelectionData, FieldNode } from '../../constants/DataTypes';
 
 //You need:
 
@@ -83,7 +83,7 @@ export default function TemplateEditorManager({
   onChange: (
     template: DataContainer<data_container_types> | null,
     defaultShown: boolean,
-    value: field_node<FieldData>
+    value: FieldNode<FieldData>
   ) => void;
 }) {
   const { settings } = useSettings();
@@ -137,8 +137,17 @@ export default function TemplateEditorManager({
                 });
             }
 
+            let fieldNode: FieldNode<FieldData> | undefined;
+            if (fieldValue) {
+              fieldNode = {
+                id: createId(),
+                type: 'field',
+                field: fieldValue
+              }
+            }
+
             if (fieldValue)
-              template?.insertNodeAfter(template, nodeKey, fieldValue as field_node<FieldData>);
+              template?.insertNodeAfter(template, nodeKey, fieldNode as FieldNode<FieldData>);
           }
 
           function addSection() {
@@ -162,12 +171,12 @@ export default function TemplateEditorManager({
 
           if (isSectionNode(actualNode)) {
             return (
-              <SectionNodeFactory template={template} id={actualNode.id} locked={locked} edit={edit} key={nodeKey} nodeKey={nodeKey} section={actualNode} onChange={onChange} addField={addField} addSection={addSection} moveUp={actualNode.moveUp} moveDown={actualNode.moveDown} deleteNode={actualNode.deleteNode} />
+              <SectionNodeFactory template={template} id={actualNode.id} locked={locked} edit={edit} key={nodeKey} nodeKey={nodeKey} section={actualNode} onChange={onChange} addField={addField} addSection={addSection} moveUp={actualNode.field.moveUp} moveDown={actualNode.field.moveDown} deleteNode={actualNode.field.deleteNode} />
             );
           }
 
           return (
-            <FieldNodeFactory template={template} id={actualNode.id} locked={locked} edit={edit} key={nodeKey} nodeKey={nodeKey} field={actualNode} onChange={onChange} addField={addField} addSection={addSection} moveUp={actualNode.moveUp} moveDown={actualNode.moveDown} deleteNode={actualNode.deleteNode} />
+            <FieldNodeFactory template={template} id={actualNode.id} locked={locked} edit={edit} key={nodeKey} nodeKey={nodeKey} field={actualNode} onChange={onChange} addField={addField} addSection={addSection} moveUp={actualNode.field.moveUp} moveDown={actualNode.field.moveDown} deleteNode={actualNode.field.deleteNode} />
           );
         })
       }

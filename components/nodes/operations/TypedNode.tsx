@@ -1,4 +1,4 @@
-import { FieldNode, Template } from '../../../constants/NodeTypes';
+import { FieldData, FieldNode, template } from '../../../constants/DataTypes';
 import BooleanInputField from '../inputs/BooleanInputField';
 import DateInputField from '../inputs/DateInputField';
 import DurationInputField from '../inputs/DurationInputField';
@@ -7,25 +7,25 @@ import SelectionInputField from '../inputs/SelectionInputField';
 import TextInputField from '../inputs/TextInputField';
 
 export default function TypedNode({ field, template, id, locked, onChange }: {
-    template: Template,
+    template: template,
     id: string,
-    field: FieldNode,
+    field: FieldNode<FieldData>,
     locked: boolean,
     onChange: (
-        template: Template,
+        template: template,
         defaultShown: boolean,
-        value: FieldNode
+        value: FieldNode<FieldData>
     ) => void
 }) {
-    switch (field.field?.type) {
+    switch (field?.field.data.type) {
         case "text": // add Labels for each based on field
             return (
                 <TextInputField
                     template={template}
                     id={field.id}
-                    fieldKey={field.field.label}
+                    fieldKey={field.field.data.label}
                     field={field.field}
-                    defaultShown={field.field.visible}
+                    defaultShown={field.field.data.visible}
                     locked={locked}
                     onChange={onChange}
                 />
@@ -36,9 +36,9 @@ export default function TypedNode({ field, template, id, locked, onChange }: {
                 <DateInputField
                     template={template}
                     id={field.id}
-                    fieldKey={field.field.label}
+                    fieldKey={field.field.data.label}
                     field={field.field}
-                    defaultShown={field.field.visible}
+                    defaultShown={field.field.data.visible}
                     locked={locked}
                     onChange={onChange}
                 />
@@ -49,9 +49,9 @@ export default function TypedNode({ field, template, id, locked, onChange }: {
                 <DurationInputField
                     template={template}
                     id={field.id}
-                    fieldKey={field.field.label}
+                    fieldKey={field.field.data.label}
                     field={field.field}
-                    defaultShown={field.field.visible}
+                    defaultShown={field.field.data.visible}
                     locked={locked}
                     onChange={onChange}
                 />
@@ -62,9 +62,9 @@ export default function TypedNode({ field, template, id, locked, onChange }: {
                 <SelectionInputField
                     template={template}
                     id={field.id}
-                    fieldKey={field.field.label}
+                    fieldKey={field.field.data.label}
                     field={field.field}
-                    defaultShown={field.field.visible}
+                    defaultShown={field.field.data.visible}
                     locked={locked}
                     onChange={onChange}
                 />
@@ -75,9 +75,9 @@ export default function TypedNode({ field, template, id, locked, onChange }: {
                 <ScaleInputField
                     template={template}
                     id={field.id}
-                    fieldKey={field.field.label}
+                    fieldKey={field.field.data.label}
                     field={field.field}
-                    defaultShown={field.field.visible}
+                    defaultShown={field.field.data.visible}
                     locked={locked}
                     onChange={onChange}
                 />
@@ -88,9 +88,9 @@ export default function TypedNode({ field, template, id, locked, onChange }: {
                 <BooleanInputField
                     template={template}
                     id={field.id}
-                    fieldKey={field.field.label}
+                    fieldKey={field.field.data.label}
                     field={field.field}
-                    defaultShown={field.field.visible}
+                    defaultShown={field.field.data.visible}
                     locked={locked}
                     onChange={onChange}
                 />
